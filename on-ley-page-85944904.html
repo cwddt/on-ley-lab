@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>leyu · 内容深层聚合</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: linear-gradient(145deg, #fce9d7 0%, #fad7c4 45%, #f3c8b0 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.2rem;
+      line-height: 1.6;
+      color: #2f2b28;
+    }
+    .page-wrapper {
+      max-width: 1200px;
+      width: 100%;
+      background: rgba(255, 248, 240, 0.75);
+      backdrop-filter: blur(3px);
+      border-radius: 48px 48px 32px 32px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 40px -12px rgba(120, 60, 30, 0.2);
+    }
+    /* hero */
+    .hero {
+      text-align: center;
+      padding: 2.8rem 1rem 3.2rem;
+      background: linear-gradient(120deg, #fceddd, #f9ddcb);
+      border-radius: 40px;
+      margin-bottom: 2.8rem;
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #3d2a1c;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 span {
+      color: #b55f38;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 720px;
+      margin: 0 auto;
+      color: #4f3d30;
+      font-weight: 400;
+      background: rgba(255, 245, 235, 0.7);
+      padding: 0.5rem 1.2rem;
+      border-radius: 60px;
+      display: inline-block;
+      backdrop-filter: blur(2px);
+    }
+    .hero .tagline {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 0.4rem 1.6rem;
+      border-radius: 40px;
+      color: #5f4232;
+      border: 1px solid rgba(200, 150, 115, 0.25);
+    }
+
+    /* 卡片通用 */
+    .card {
+      background: white;
+      border-radius: 32px;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 12px 28px -8px rgba(100, 50, 25, 0.08);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      border: 1px solid rgba(235, 210, 190, 0.3);
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 32px -8px rgba(100, 55, 25, 0.12);
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #3d2a1c;
+      margin-bottom: 1.6rem;
+      border-left: 8px solid #d6956a;
+      padding-left: 1rem;
+    }
+
+    /* 优势区 三列 */
+    .advantages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      margin-bottom: 2.8rem;
+    }
+    .advantage-item h3 {
+      font-weight: 500;
+      font-size: 1.4rem;
+      color: #563b2b;
+      margin-bottom: 0.5rem;
+    }
+    .advantage-item p {
+      color: #5a4a3e;
+      font-size: 0.95rem;
+    }
+    .advantage-item .num {
+      display: inline-block;
+      background: #eacfbb;
+      color: #3d2a1c;
+      font-weight: 600;
+      width: 2rem;
+      height: 2rem;
+      line-height: 2rem;
+      text-align: center;
+      border-radius: 30px;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    /* 说明区 + faq摘要混合 */
+    .explain-faq-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2.8rem;
+    }
+    .explain-block {
+      flex: 2;
+      min-width: 260px;
+    }
+    .explain-block p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #3f342c;
+    }
+    .explain-block strong {
+      color: #9a5f3f;
+    }
+    .faq-mini {
+      flex: 1.2;
+      min-width: 200px;
+      background: #faf0e7;
+      border-radius: 28px;
+      padding: 1.6rem 1.6rem 2rem;
+    }
+    .faq-mini h4 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #3d2a1c;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #e6cbb8;
+      padding-bottom: 0.4rem;
+    }
+    .faq-item {
+      margin-bottom: 0.9rem;
+    }
+    .faq-item .q {
+      font-weight: 500;
+      color: #563b2b;
+      font-size: 0.95rem;
+    }
+    .faq-item .a {
+      color: #5e4d40;
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+      padding-left: 0.5rem;
+      border-left: 3px solid #d8b6a0;
+    }
+
+    /* 场景小卡片 */
+    .scene-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+    .scene-chip {
+      background: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 60px;
+      font-size: 0.95rem;
+      color: #3f342c;
+      border: 1px solid #ebd4c2;
+      box-shadow: 0 2px 6px rgba(150, 90, 55, 0.04);
+      transition: all 0.1s ease;
+    }
+    .scene-chip:hover {
+      background: #f5e4d6;
+      border-color: #c99879;
+    }
+
+    /* 底部链接区 */
+    .footer-links {
+      margin-top: 2rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid #e7d3c2;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem 1.5rem;
+    }
+    .footer-links .left {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 2rem;
+      font-size: 0.95rem;
+    }
+    .footer-links a {
+      color: #7a5c47;
+      text-decoration: none;
+      padding: 0.3rem 0.9rem;
+      border-radius: 30px;
+      background: rgba(255, 240, 228, 0.5);
+      transition: background 0.15s, color 0.1s;
+      font-weight: 450;
+    }
+    .footer-links a:hover {
+      background: #e4cdbb;
+      color: #2f1f16;
+    }
+    .footer-links .leyu-anchor {
+      background: #dbaa88;
+      color: #2b1d15;
+      font-weight: 500;
+      padding: 0.4rem 1.6rem;
+      border-radius: 40px;
+      letter-spacing: 0.01em;
+      box-shadow: 0 2px 8px rgba(160, 90, 50, 0.15);
+    }
+    .footer-links .leyu-anchor:hover {
+      background: #ce9a77;
+      color: #1f130c;
+    }
+    .footer-note {
+      font-size: 0.8rem;
+      color: #6e5950;
+      margin-top: 0.3rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 720px) {
+      .page-wrapper { padding: 1.5rem 1rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .advantages-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .explain-faq-row { flex-direction: column; }
+      .footer-links { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.8rem; }
+      .card { padding: 1.4rem; }
+      .hero p { font-size: 1rem; }
+      .section-title { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+  <!-- hero -->
+  <div class="hero">
+    <h1>深读 · <span>leyu</span></h1>
+    <p>从关键词走向主题深度</p>
+    <div class="tagline">信息密度 · 语境理解 · 灵活聚合</div>
+  </div>
+
+  <!-- 优势区 -->
+  <div class="advantages-grid">
+    <div class="card advantage-item">
+      <div class="num">①</div>
+      <h3>语境优先</h3>
+      <p>围绕核心主题梳理内容脉络，不依赖碎片标签，保留上下文逻辑，降低信息损耗。</p>
+    </div>
+    <div class="card advantage-item">
+      <div class="num">②</div>
+      <h3>结构重组</h3>
+      <p>对原始素材做层次化抽取：要点、场景、关联概念，形成可浏览的轻量知识单元。</p>
+    </div>
+    <div class="card advantage-item">
+      <div class="num">③</div>
+      <h3>渐进呈现</h3>
+      <p>从概括到细节，按需展开。适合快速扫描，也支持定向深入，平衡宽度与深度。</p>
+    </div>
+  </div>
+
+  <!-- 说明 + FAQ摘要 -->
+  <div class="explain-faq-row">
+    <div class="card explain-block">
+      <h2 class="section-title">主题内容展开</h2>
+      <p>许多关键词背后承载着多层议题。以 <strong>leyu</strong> 为锚点，可延伸出信息组织、语义关联、动态聚合等维度。不同于简单罗列，我们更关注内容之间的真实联系：一个概念如何嵌套在更大的框架里，又能拆解出哪些可独立讨论的子话题。</p>
+      <p>例如在整理资料时，<a href="https://on-ley.com.cn" style="color:#9c6a4b; font-weight:500; text-decoration:underline;">leyu</a> 帮助使用者将分散的片段重新定位——不仅是检索，更是理解与编排。适用场景包括研究笔记、文档摘要、知识库索引等需要结构感的内容工作流。</p>
+      <p style="margin-top:0.8rem;">同时支持从单一入口延展为网状结构，保留材料本来的复杂性，同时提供清晰的浏览线索。</p>
+    </div>
+    <div class="faq-mini">
+      <h4>常见疑问</h4>
+      <div class="faq-item">
+        <div class="q">▸ 是否需要手动分类？</div>
+        <div class="a">提供自动与半自动两种方式，用户可微调分组逻辑。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">▸ 适合处理什么类型内容？</div>
+        <div class="a">长文、技术文档、访谈记录等多段落材料效果较好。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">▸ 输出格式？</div>
+        <div class="a">结构化文本、简易卡片、以及可嵌入的摘要段落。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 场景小标签 -->
+  <div class="scene-row">
+    <span class="scene-chip">📋 研究笔记</span>
+    <span class="scene-chip">📚 文献概览</span>
+    <span class="scene-chip">🧩 概念拆解</span>
+    <span class="scene-chip">🔗 关联索引</span>
+    <span class="scene-chip">📌 主题速写</span>
+    <span class="scene-chip">⚡ 轻量聚合</span>
+  </div>
+
+  <!-- 底部链接 -->
+  <div class="footer-links">
+    <div class="left">
+      <a href="https://on-ley.com.cn" class="leyu-anchor">leyu</a>
+      <a href="#">内容原则</a>
+      <a href="#">使用场景</a>
+      <a href="#">结构说明</a>
+    </div>
+    <div class="footer-note">
+      围绕关键词的主题内容展开 · 简洁专业
+    </div>
+  </div>
+</div>
+</body>
+</html>
