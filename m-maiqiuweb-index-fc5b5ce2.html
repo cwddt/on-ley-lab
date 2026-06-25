@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
+  <title>买球网 · 再次相遇 从收藏开始</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: #f4f6fa;
+      color: #1f2933;
+      line-height: 1.6;
+    }
+
+    /* 导航区 — 简洁深沉 */
+    .nav-bar {
+      background: #0b1a2b;
+      padding: 0.9rem 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .nav-brand {
+      color: #e6edf5;
+      font-weight: 500;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.6rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #b4c7db;
+      text-decoration: none;
+      font-size: 0.92rem;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #f0c674;
+      border-bottom-color: #f0c674;
+    }
+
+    /* 深色头图 hero */
+    .hero-dark {
+      background: linear-gradient(145deg, #102433 0%, #1b3147 100%);
+      padding: 4rem 2.2rem 4.5rem;
+      text-align: center;
+      color: #dde6ef;
+    }
+
+    .hero-dark h1 {
+      font-size: 2.1rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-dark h1 strong {
+      font-weight: 600;
+      color: #f5d78e;
+    }
+
+    .hero-dark p {
+      max-width: 640px;
+      margin: 0 auto 1.8rem;
+      font-size: 1rem;
+      color: #bcccdb;
+    }
+
+    .hero-return-note {
+      background: rgba(255,255,240,0.05);
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      border: 1px solid #3f5a74;
+      color: #c7d6e5;
+    }
+
+    /* 正文浅色区 container */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 2.4rem 1.8rem 3.5rem;
+    }
+
+    /* 简介段 — 承接，克制的知识语气 */
+    .intro-block {
+      background: white;
+      padding: 2.4rem 2.2rem;
+      border-radius: 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      margin-bottom: 2.8rem;
+    }
+
+    .intro-block p {
+      margin-bottom: 1.2rem;
+    }
+
+    .intro-block a {
+      color: #b45f2b;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dotted #b45f2b;
+      transition: color 0.15s;
+    }
+
+    .intro-block a:hover {
+      color: #833f1a;
+      border-bottom-style: solid;
+    }
+
+    .keep-tip {
+      background: #f1efe9;
+      padding: 1rem 1.6rem;
+      border-radius: 40px;
+      display: inline-block;
+      font-size: 0.9rem;
+      color: #3d4d5c;
+      margin-top: 0.8rem;
+    }
+
+    .keep-tip span {
+      background: #b45f2b;
+      color: white;
+      border-radius: 30px;
+      padding: 0.15rem 0.75rem;
+      margin-right: 6px;
+      font-size: 0.8rem;
+    }
+
+    /* 三个场景模块 — 卡片式 */
+    .scenes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      margin-bottom: 2.6rem;
+    }
+
+    @media (max-width: 780px) {
+      .scenes-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+    }
+
+    .scene-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.8rem 1.4rem 1.6rem;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
+      transition: transform 0.15s;
+      border: 1px solid #e9edf2;
+    }
+
+    .scene-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .scene-card .emoji-badge {
+      display: inline-block;
+      background: #1b3147;
+      color: #f0d68b;
+      font-size: 1.6rem;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      border-radius: 16px;
+      margin-bottom: 0.8rem;
+    }
+
+    .scene-card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #102433;
+    }
+
+    .scene-card p {
+      font-size: 0.92rem;
+      color: #2d3d4f;
+    }
+
+    .scene-card a {
+      color: #b45f2b;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: #d9b382;
+    }
+
+    .scene-card a:hover {
+      color: #6e3f1d;
+    }
+
+    /* 常见说明 (faq 摘要) */
+    .faq-summary {
+      background: white;
+      border-radius: 18px;
+      padding: 2rem 2rem 1.8rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      margin: 2.8rem 0 2.2rem;
+    }
+
+    .faq-summary h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      border-left: 4px solid #b45f2b;
+      padding-left: 0.8rem;
+      margin-bottom: 1.2rem;
+      color: #0b1a2b;
+    }
+
+    .faq-item {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      align-items: baseline;
+    }
+
+    .faq-item .q {
+      font-weight: 600;
+      color: #102433;
+      min-width: 5.2rem;
+    }
+
+    .faq-item .a {
+      color: #2c3f53;
+    }
+
+    .faq-item .a a {
+      color: #b45f2b;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* 再次访问提示 & 收藏片段 */
+    .return-note {
+      background: #e7ecf3;
+      padding: 1.5rem 2rem;
+      border-radius: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.2rem;
+    }
+
+    .return-note p {
+      margin: 0.1rem 0;
+      font-size: 0.95rem;
+    }
+
+    .return-note .bookmark-highlight {
+      background: #102433;
+      color: #efd992;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* footer 简洁 */
+    .page-footer {
+      text-align: center;
+      padding: 2rem 1.5rem 2.8rem;
+      color: #5f6f7d;
+      font-size: 0.85rem;
+      border-top: 1px solid #dbe0e6;
+      margin-top: 1.5rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #dae0e7;
+      margin: 1.2rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <nav class="nav-bar">
+    <span class="nav-brand">◈ 再次访问</span>
+    <ul class="nav-links">
+      <li><a href="#">首页</a></li>
+      <li><a href="#">场景</a></li>
+      <li><a href="#">关注</a></li>
+      <li><a href="#">说明</a></li>
+    </ul>
+  </nav>
+
+  <!-- 深色头图 — 再次访问 / 收藏气氛 -->
+  <div class="hero-dark">
+    <h1>你曾到访 · 今日 <strong>买球网</strong></h1>
+    <p>从收藏夹里重新打开，或输入熟悉的域名。每一次返回，都是与内容的再次对话。</p>
+    <div class="hero-return-note">✦ 收藏 · 持续关注 · 保持连接</div>
+  </div>
+
+  <div class="container">
+    <!-- 核心介绍：再次访问 + 收藏切入 -->
+    <div class="intro-block">
+      <p>
+        当浏览器书签栏里积累了几十个站点，有些页面再也未被点开——但<strong>买球网</strong>却值得你保留在常用位置。  
+        这不是一个需要每日刷新看数据波动的工具型网站，而是一个提供赛事动态、球队信息以及相关背景阅读的聚合节点。  
+        如果你曾因为某场焦点战或某个转会消息而来过，<a href="https://m-maiqiuweb.com">买球网</a>如今的内容结构已经过调整，资讯呈现更加紧凑，且保留了过往的查询功能。
+      </p>
+      <p>
+        将链接加入收藏夹，意味着你愿意再次踏入同一片信息场。在浏览器地址栏输入 <strong>m-maiqiuweb.com</strong> 并回车，就像推开一扇熟悉的门。  
+        页面右侧的“关注”区域会持续更新，而核心内容则围绕联赛、数据以及深度短评展开。这是属于长期读者的轻量导航。
+      </p>
+      <div class="keep-tip">
+        <span>✦</span> 书签栏里的 <a href="https://m-maiqiuweb.com">买球网</a> · 常驻入口
+      </div>
+    </div>
+
+    <!-- 三个场景模块：不同使用情境 + 收藏 / 再次访问 -->
+    <div class="scenes-grid">
+      <div class="scene-card">
+        <div class="emoji-badge">📑</div>
+        <h3>从收藏夹唤醒</h3>
+        <p>周末打开书签，点击「买球网」—— 直接进入联赛列表。无需搜索，无需重新适应布局。每一轮赛程都整齐排列。</p>
+        <p style="margin-top:0.6rem">→ <a href="https://m-maiqiuweb.com">买球网</a> 已适配移动端</p>
+      </div>
+      <div class="scene-card">
+        <div class="emoji-badge">🔖</div>
+        <h3>持续关注变化</h3>
+        <p>球队状态、积分变动、转会传闻。信息流并不喧嚣，但重要节点都会在首页更新。适合每隔两三天回来扫一眼。</p>
+        <p style="margin-top:0.6rem">标记 <a href="https://m-maiqiuweb.com">买球网</a> 为“经常访问”</p>
+      </div>
+      <div class="scene-card">
+        <div class="emoji-badge">🧭</div>
+        <h3>知识型浏览</h3>
+        <p>不仅是赛果，还有背景知识卡片：历史交锋、球场变迁、青训故事。适合慢慢阅读，而不是快速滑动。</p>
+        <p style="margin-top:0.6rem">从 <a href="https://m-maiqiuweb.com">买球网</a> 开始探索</p>
+      </div>
+    </div>
+
+    <!-- 常见说明 (FAQ 摘要) 偏知识型 -->
+    <div class="faq-summary">
+      <h3>常见疑问 · 持续使用的读者会关心</h3>
+
+      <div class="faq-item">
+        <span class="q">再次访问时</span>
+        <span class="a">页面默认展示最近更新。如果你希望固定某个联赛板块，可以使用页面内的“关注”按钮，下次会出现在顶部。</span>
+      </div>
+      <div class="faq-item">
+        <span class="q">收藏不同步</span>
+        <span class="a">浏览器书签同步需登录对应账号。无论在哪个设备，只要访问 <a href="https://m-maiqiuweb.com">买球网</a>，相同域名即可进入。</span>
+      </div>
+      <div class="faq-item">
+        <span class="q">内容更新节奏</span>
+        <span class="a">比赛日前后更新较密集，休赛期以专题和回顾为主。没有弹窗推送，适合主动回访型读者。</span>
+      </div>
+      <div class="faq-item">
+        <span class="q">是否需要注册</span>
+        <span class="a">绝大多数内容可以直接浏览。部分深度评论或数据比较功能可能建议登录，但阅读不受限。</span>
+      </div>
+    </div>
+
+    <!-- 再次访问 & 收藏区域 — 嵌入链接 -->
+    <div class="return-note">
+      <p>
+        <span style="font-weight: 500;">📌 再次回到</span> 如果还没有添加书签，现在把 <a href="https://m-maiqiuweb.com" style="color:#102433;font-weight:600;">买球网</a> 加入收藏栏。
+      </p>
+      <span class="bookmark-highlight">⌘ + D / Ctrl + D</span>
+    </div>
+    <div class="return-note" style="margin-top: 0.8rem; background: white; border: 1px solid #dee4eb;">
+      <p>
+        🗂️ 持续关注意味着你认可这里的调性。如果有朋友问起可靠的赛事信息站，也可以推荐 <a href="https://m-maiqiuweb.com">买球网</a> 给他们。
+      </p>
+    </div>
+
+  </div>
+
+  <footer class="page-footer">
+    <p>买球网 · 从收藏到再次访问 · 内容持续生长</p>
+    <p style="opacity:0.6; margin-top:0.3rem;">m-maiqiuweb.com — 书签里的老朋友</p>
+  </footer>
+
+</body>
+</html>
